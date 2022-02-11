@@ -29,4 +29,14 @@ func main() {
 	fmt.Println("voce escolheu a opcao", escolha)
 	fmt.Println("o endereco da variavel escolha é", &escolha)
 
+	if escolha == 1 {
+		fmt.Println("Monitorando...!")
+	} else if escolha == 2 {
+		fmt.Println("Exibindo logs...!")
+	} else if escolha == 0 {
+		fmt.Println("Saindo do programa...!")
+	} else {
+		fmt.Println("Opção invávila...!")
+	}
+
 }
