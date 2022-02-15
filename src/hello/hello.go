@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 	"reflect"
 )
@@ -9,34 +10,34 @@ import (
 func main() {
 
 	exibeIntroducao()
+	for {
+		exibeMenu()
 
-	exibeMenu()
+		// if escolha == 1 {
+		// 	fmt.Println("Monitorando...!")
+		// } else if escolha == 2 {
+		// 	fmt.Println("Exibindo logs...!")
+		// } else if escolha == 0 {
+		// 	fmt.Println("Saindo do programa...!")
+		// } else {
+		// 	fmt.Println("Opção invávila...!")
+		// }
 
-	// if escolha == 1 {
-	// 	fmt.Println("Monitorando...!")
-	// } else if escolha == 2 {
-	// 	fmt.Println("Exibindo logs...!")
-	// } else if escolha == 0 {
-	// 	fmt.Println("Saindo do programa...!")
-	// } else {
-	// 	fmt.Println("Opção invávila...!")
-	// }
+		opcaoEscolhida := lerEntrada()
 
-	opcaoEscolhida := lerEntrada()
-
-	switch opcaoEscolhida {
-	case 0:
-		fmt.Println("Saindo do programa...!")
-		sair(0)
-	case 1:
-		fmt.Println("Monitorando...!")
-	case 2:
-		fmt.Println("Exibindo logs...!")
-	default:
-		fmt.Println("Opção invávila...!")
-		sair(-1)
+		switch opcaoEscolhida {
+		case 0:
+			fmt.Println("Saindo do programa...!")
+			sair(0)
+		case 1:
+			iniciarMonitoramento()
+		case 2:
+			fmt.Println("Exibindo logs...!")
+		default:
+			fmt.Println("Opção invávila...!")
+			sair(-1)
+		}
 	}
-
 }
 
 func exibeIntroducao() {
@@ -73,4 +74,16 @@ func lerEntrada() int {
 
 func sair(codigo int) {
 	os.Exit(codigo)
+}
+
+func iniciarMonitoramento() {
+	fmt.Println("Monitorando...!")
+	site := "https://www.alura.com.br"
+	resposta, error := http.Get(site)
+
+	if resposta.StatusCode == 200 {
+		fmt.Println("Site", site, "carregado com sucesso")
+	} else {
+		fmt.Println("Site", site, "falhou no carregamento com o status code:", resposta.StatusCode, "com erro: ", error)
+	}
 }
