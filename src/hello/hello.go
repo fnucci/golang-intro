@@ -78,23 +78,26 @@ func sair(codigo int) {
 
 func iniciarMonitoramento() {
 	fmt.Println("Monitorando...!")
-	site := "https://www.alura.com.br"
-	resposta, error := http.Get(site)
+	sites := []string{"https://www.alura.com.br", "https://www.caelum.com.br", "https://www.youtube.com.br", "https://www.twitch.tv/", "https://www.gmail.com"}
 
-	if resposta.StatusCode == 200 {
-		fmt.Println("Site", site, "carregado com sucesso")
-	} else {
-		fmt.Println("Site", site, "falhou no carregamento com o status code:", resposta.StatusCode, "com erro: ", error)
+	for i, site := range sites {
+		fmt.Println("Posicao", i, "conteudo", site)
+
+		resposta, error := http.Get(site)
+		if resposta.StatusCode == 200 {
+			fmt.Println("Site", site, "carregado com sucesso")
+		} else {
+			fmt.Println("Site", site, "falhou no carregamento com o status code:", resposta.StatusCode, "com erro: ", error)
+		}
 	}
-
-	var sites [5]string
-	sites[0] = "https://www.alura.com.br"
-	sites[1] = "https://www.caelum.com.br"
-	sites[2] = "https://www.youtube.com.br"
-	sites[3] = "https://www.twitch.com.br"
-	sites[4] = "https://www.gmail.com.br"
-	fmt.Println(sites)
-
+	// for i := 0; i < len(sites); i++ {
+	// 	resposta, error := http.Get(sites[1])
+	// 	if resposta.StatusCode == 200 {
+	// 		fmt.Println("Site", sites[i], "carregado com sucesso")
+	// 	} else {
+	// 		fmt.Println("Site", sites[i], "falhou no carregamento com o status code:", resposta.StatusCode, "com erro: ", error)
+	// 	}
+	// }
 	exibeNomesComSlices()
 }
 
