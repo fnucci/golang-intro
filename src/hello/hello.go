@@ -1,10 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 	"reflect"
+	"strings"
 	"time"
 )
 
@@ -82,17 +85,23 @@ func sair(codigo int) {
 
 func iniciarMonitoramento() {
 	fmt.Println("Monitorando...!")
-	sites := []string{"https://www.alura.com.br", "https://www.caelum.com.br", "https://www.youtube.com.br", "https://www.twitch.tv/", "https://www.gmail.com"}
-
+	// sites := []string{"https://www.alura.com.br", "https://www.caelum.com.br", "https://www.youtube.com.br", "https://www.twitch.tv/", "https://www.gmail.com"}
+	sites := lerArquivo()
+	fmt.Println(sites)
 	for n := 0; n < monitoramentos; n++ {
 		for i, site := range sites {
 			fmt.Println("Posicao", i, "conteudo", site)
 
 			resposta, error := http.Get(site)
+
+			if error != nil {
+				fmt.Println("Ocorreu um erro: ", error)
+			}
+
 			if resposta.StatusCode == 200 {
 				fmt.Println("Site", site, "carregado com sucesso")
 			} else {
-				fmt.Println("Site", site, "falhou no carregamento com o status code:", resposta.StatusCode, "com erro: ", error)
+				fmt.Println("Site", site, "falhou no carregamento com o status code:", resposta.StatusCode)
 			}
 		}
 		time.Sleep(delay * time.Second)
@@ -113,4 +122,33 @@ func exibeNomesComSlices() {
 	fmt.Println(len(nomes))
 	nomes = append(nomes, "Antonio", "Maria")
 	fmt.Println(cap(nomes))
+}
+
+func lerArquivo() []string {
+
+	var sites []string
+	arquivo, error := os.Open("sites.txt")
+	// arquivo, error := ioutil.ReadFile("sites.txt")
+
+	if error != nil {
+		fmt.Println("Ocorreu um erro: ", error)
+	}
+
+	leitor := bufio.NewReader(arquivo)
+
+	// fmt.Println(string(arquivo))
+
+	for {
+		linha, err := leitor.ReadString('\n')
+
+		linha = strings.TrimSpace(linha)
+		sites = append(sites, linha)
+		if err == io.EOF {
+			break
+		}
+	}
+
+	arquivo.Close()
+
+	return sites
 }
