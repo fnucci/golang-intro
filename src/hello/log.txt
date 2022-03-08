@@ -1,0 +1,15 @@
+08/03/2022 14:22:03 - https://www.alura.com.br- online: true
+08/03/2022 14:22:04 - https://www.caelum.com.br- online: true
+08/03/2022 14:22:04 - https://www.youtube.com.br- online: true
+08/03/2022 14:22:05 - https://www.twitch.tv- online: true
+08/03/2022 14:22:06 - https://www.gmail.com- online: true
+08/03/2022 14:22:12 - https://www.alura.com.br- online: true
+08/03/2022 14:22:12 - https://www.caelum.com.br- online: true
+08/03/2022 14:22:12 - https://www.youtube.com.br- online: true
+08/03/2022 14:22:13 - https://www.twitch.tv- online: true
+08/03/2022 14:22:14 - https://www.gmail.com- online: true
+08/03/2022 14:22:19 - https://www.alura.com.br- online: true
+08/03/2022 14:22:19 - https://www.caelum.com.br- online: true
+08/03/2022 14:22:20 - https://www.youtube.com.br- online: true
+08/03/2022 14:22:20 - https://www.twitch.tv- online: true
+08/03/2022 14:22:21 - https://www.gmail.com- online: true
