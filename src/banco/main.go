@@ -95,4 +95,22 @@ func main() {
 	fmt.Println(conta1.GetSaldo())
 	fmt.Println(conta2.GetSaldo())
 	fmt.Println(conta3.GetSaldo())
+
+	contaPoupanca1 := contas.ContaPoupanca{Titular: clientes.Titular{"Antonio", "01456786532", "Tecnico"}, Agencia: 435, Conta: 987643, Operacao: 1}
+	contaPoupanca1.Depositar(1500.00)
+	fmt.Println(contaPoupanca1)
+
+	PagarBoleto(&contaPoupanca1, 264.79)
+	fmt.Println(contaPoupanca1.GetSaldo())
+
+	PagarBoleto(conta3, 42.99)
+	fmt.Println(conta3.GetSaldo())
+}
+
+func PagarBoleto(conta verificaConta, valorDoBoleto float64) {
+	conta.Sacar(valorDoBoleto)
+}
+
+type verificaConta interface {
+	Sacar(valorDoSaque float64) (string, float64)
 }
